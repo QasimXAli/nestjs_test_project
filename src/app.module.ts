@@ -1,9 +1,9 @@
 import { Module } from '@nestjs/common';
 import { AuthModule } from './auth/auth.module';
-import { ProductsModule } from './products/products.module';
 import { MongooseModule } from '@nestjs/mongoose';
 import { UserModule } from './user/user.module';
 import { ConfigModule, ConfigService } from '@nestjs/config';
+import { SharedModule } from './jwt/jwt.register.module';
 
 @Module({
   imports: [
@@ -18,6 +18,6 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
         uri: configService.get<string>('MONGODB_URI'),
       }),
       inject: [ConfigService],
-    }), AuthModule, ProductsModule, UserModule,],
+    }), AuthModule, UserModule, SharedModule],
 })
 export class AppModule { }

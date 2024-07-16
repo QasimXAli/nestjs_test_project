@@ -4,6 +4,7 @@ import { ValidationPipe } from '@nestjs/common';
 import { AllExceptionsFilter } from './filters/all.exception.filters';
 import * as dotenv from 'dotenv';
 import { ConfigService } from '@nestjs/config';
+import { ValidationExceptionFilter } from './filters/validation.exception.filter';
 
 dotenv.config();
 
@@ -14,7 +15,7 @@ async function bootstrap() {
     transform: true,
     forbidNonWhitelisted: true,
   }));
-  app.useGlobalFilters(new AllExceptionsFilter());
+  app.useGlobalFilters(new AllExceptionsFilter(), new ValidationExceptionFilter);
   const configService = app.get(ConfigService);
   await app.listen(configService.get<number>('PORT') || 3000);
 }
