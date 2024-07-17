@@ -4,6 +4,7 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { UserModule } from './user/user.module';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { SharedModule } from './jwt/jwt.register.module';
+import { TodoModule } from './todo/todo.module';
 
 @Module({
   imports: [
@@ -18,6 +19,6 @@ import { SharedModule } from './jwt/jwt.register.module';
         uri: configService.get<string>('MONGODB_URI'),
       }),
       inject: [ConfigService],
-    }), AuthModule, UserModule, SharedModule],
+    }), AuthModule, UserModule, SharedModule, TodoModule],
 })
 export class AppModule { }
